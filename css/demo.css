@@ -4,6 +4,7 @@ body {
 	width:100%;
 	float:left;
 	font-size:14px;
+	background:none #f5f5f5;
 }
 
 body, select, textarea, input, button {
@@ -14,7 +15,29 @@ select, textarea, input, button {
 	font-size:100%;
 }
 
-.messages, .messages .message, .new-message {
+.demo {
+	width:600px;
+	padding-left:50%;
+	margin-left:-300px;
+	float:left;
+}
+
+@media all and (max-width: 750px){
+	.demo {
+		margin:0;
+		padding:20px;
+		width:100%;
+		box-sizing:border-box;
+	}
+}
+
+.demo h1 {
+	text-align:center;
+}
+
+.messages, 
+.messages .message, 
+.new-message {
 	width:100%;
 	float:left;
 	padding:10px;
@@ -23,8 +46,8 @@ select, textarea, input, button {
 	position:relative;
 }
 
-.messages {
-	background:none #eee;
+.new-message {
+	margin-top:50px;
 }
 
 .message {
@@ -32,7 +55,7 @@ select, textarea, input, button {
 }
 
 .new-message {
-	background:none #ff0;
+	background:none #e5e5e5;
 	padding-right:75px;
 	position:relative;
 }
@@ -46,14 +69,18 @@ select, textarea, input, button {
 	line-height:50px;
 	text-align:center;
 	border:0 none;
-	background:none #000;
+	background:none #2f9a8a;
 	color:#fff;
 	font-size:160%;
 	cursor:pointer;
 }
 
+.new-message button:hover {
+	background:none #1d7e6f;
+}
+
 .new-message button.recording {
-	background:none #f00;
+	background:none #d00;
 }
 
 .new-message button,
@@ -134,6 +161,14 @@ button.audio {
 	top:0;
 	left:0;
 	cursor:pointer;
+	margin:0;
+	padding:0;
+}
+
+.audio-control .playtoggle::-moz-focus-inner {
+	border:0 none;
+	padding:0;
+	margin:0;
 }
 
 .audio-control .timer {
@@ -143,6 +178,14 @@ button.audio {
 	position:absolute;
 	right:0;
 	top:0;
+}
+
+.audio-control .timer:after {
+	content:'s';
+}
+
+.audio-control.loading .timer:after {
+	content:'';
 }
 
 .audio-control .duration {
@@ -159,10 +202,20 @@ button.audio {
 	top:-1px;
 	left:0;
 	height:4px;
-	background:#f00;
+	background:#2f9a8a;
 }
 
 .new-message .onair {
 	color:#d00;
 	font-weight:900;
+}
+
+.new-message .timer:after {
+	content:'s';
+}
+
+.message .timestamp {
+	font-size:80%;
+	font-weight:900;
+	color:#ddd;
 }

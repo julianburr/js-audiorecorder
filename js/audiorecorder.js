@@ -47,7 +47,6 @@
 			navigator.getUserMedia({
 				audio:true
 			}, gotStream, function(e){
-				console.log('error',e);
 				settings.onerror(e);
 				$(window).trigger('audiorecorder:error', [e]);
 			});
@@ -55,8 +54,6 @@
 		}
 		
 		function gotStream(stream){
-			
-			console.log('gotStream', stream);
 			
 			// Run accept event
 			settings.onaccept(stream);
@@ -147,7 +144,6 @@
 			}
 
 			this.getBuffers = function(cb){
-				console.log('getBuffers');
 				currCallback = cb;
 				worker.postMessage({ command: 'getBuffers', uuid:uuid })
 			}
@@ -213,8 +209,6 @@
 			var uuid = data.uuid;
 			var blob = data.blob;
 			
-			console.log('doneEncoding', uuid, data, blob);
-			
 			settings.onencode(uuid, blob);
 			$(window).trigger('audiorecorder:encode', [uuid, blob]);
 			
@@ -243,7 +237,6 @@
 						settings.onsuccess(e.data.uuid, mp3Blob, mp3base64);
 						$(window).trigger('audiorecorder:success', [e.data.uuid, mp3Blob, mp3base64]);
 						
-						console.log('success', e.data.uuid, e.data, e)
 					}
 				}
 			}

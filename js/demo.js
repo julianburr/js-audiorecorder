@@ -9,14 +9,21 @@ $(document).ready( function(){
 		
 		var timestamp = document.createElement('div');
 		timestamp.className = 'timestamp';
-		timestamp.innerHTML = new Date().getTime();
+		var now = new Date();
+		var hours = now.getHours();
+		var am = 'am';
+		if( hours > 12 ){
+			hours -= 12;
+			am = 'pm';
+		}
+		timestamp.innerHTML = now.getFullYear() + '/' + ( '00' + ( now.getMonth() + 1 ) ).substr(-2) + '/' + ( '00' + now.getDate() ).substr(-2) + ' ' + ( '00' + hours ).substr(-2) + ':' + ( '00' + now.getMinutes() ).substr(-2) + am
 		message.appendChild(timestamp);
 		
 		switch(type){
 			case 'text':
 				var content = document.createElement('div');
 				content.className = 'content';
-				content.innerHTML = val.message;
+				content.innerHTML = val.message.replace(/\n/g, '<br>');
 				message.appendChild(content);
 			break;
 			case 'audio':

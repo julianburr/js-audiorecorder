@@ -9,9 +9,7 @@ this.onmessage = function(e) {
 	}
 	
 	switch (e.data.cmd) {
-	case 'init':
-		console.log('mp3 init', uuid);
-	
+	case 'init':	
 		if (!e.data.config) {
 			e.data.config = { };
 		}
