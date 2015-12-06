@@ -27,7 +27,7 @@ $(document).ready( function(){
 				content.setAttribute('data-duration', val.duration);
 				
 				var control = document.createElement('div');
-				control.className = 'audio-control';
+				control.className = 'audio-control loading';
 				
 				var playtoggle = document.createElement('button');
 				playtoggle.className = 'playtoggle icon-play_arrow';
@@ -54,14 +54,26 @@ $(document).ready( function(){
 	}
 	
 	function adjustTextareaHeight( obj ){
+		$(obj).height(1);
+		if( $(obj)[0].scrollHeight != $(obj).outerHeight(true) && $(obj)[0].scrollHeight > 50 ){
+			$(obj).outerHeight( $(obj)[0].scrollHeight );
+		} else {
+			$(obj).outerHeight( 50 );
+		}
 	}
 	
 	function saveAudio(uuid, blob, base64){
 		var url = 'data:audio/mp3;base64,' + base64;
 		var message_content = $('#uuid_' + uuid);
+		var duration_played = message_content.find('.duration .duration-played');
 		
 		var audio = document.createElement('audio');
 		audio.setAttribute('volume', 1);
+		
+		audio.addEventListener('timeupdate', function(e){
+			var percent = audio.currentTime / audio.duration * 100;
+			duration_played.css({ 'width':percent + '%' });
+		});
 		
 		var source = document.createElement('source');
 		source.setAttribute('type','audio/mpeg');
@@ -71,6 +83,8 @@ $(document).ready( function(){
 		$(message_content).append(audio);
 		timers[uuid] = message_content.find('.timer').timer();
 		timers[uuid].set( $(message_content).attr('data-duration') );
+		
+		$(message_content).find('.loading').removeClass('loading');
 	}
 
 	var recorder = $.audioRecorder({
@@ -83,20 +97,14 @@ $(document).ready( function(){
 			console.log('error occured', e);
 		}
 	});
-	
-	$(window).on('audiorecorder:accept', function(stream){
-		console.log('tigger got fired', stream);
-	});
-	
-	console.log('before init');
 	recorder.init();
 	
-	var timer = $('.message-box .timer').timer();
-	
-	$('button.audio').on('mousedown', function(){
+	var timer = $('.message-box .timer').timer();	
+	$('.new-message button.audio').on('mousedown', function(){
 		$(this).addClass('recording')
 		$('div.message-box').show();
 		$('textarea.message-box').hide();
+		timer.clear();
 		timer.start();
 		recorder.start();
 	}).on('mouseup', function(){
@@ -105,13 +113,14 @@ $(document).ready( function(){
 		$('textarea.message-box').show();
 		timer.stop();
 		recorder.stop();
+		console.log('timer stopped', timer.duration);
 		addMessage('audio', {uuid:recorder.uuid, duration:timer.duration});
 	});
 	
-	$('button.send').on('click', function(){
+	$('.new-message button.send').on('click', function(){
 		if( $('textarea.message-box').val() > '' ){
 			addMessage('text', {message:$('textarea.message-box').val()});
-			$('textarea.message-box').val('')
+			$('textarea.message-box').val('').outerHeight(50);
 			if( $('button.audio').attr('data-accepted') == 1 ){
 				$('button.send').hide();
 				$('button.audio').show();
@@ -126,6 +135,7 @@ $(document).ready( function(){
 		var uuid = content.attr('data-uuid');
 		var audio = message.find('audio').get(0);
 		var timer = message.find('.timer');
+		var duration_played = content.find('.duration .duration-played');
 		var $timer = timers[uuid];
 		
 		console.log('click', $timer);
@@ -137,6 +147,7 @@ $(document).ready( function(){
 		if( playtoggle.hasClass('icon-play_arrow') ){
 			if( !playtoggle.hasClass('started') ){
 				$timer.set(0);
+				duration_played.width(0);
 			}
 			$timer.start();
 			audio.play();
@@ -151,14 +162,14 @@ $(document).ready( function(){
 			playtoggle.addClass('icon-play_arrow').removeClass('icon-pause').removeClass('started');
 			$timer.stop();
 			$timer.set( content.attr('data-duration' ) );
+			duration_played.css({ 'width':'100%' });
 		});
 		
 	});
 	
 	$('textarea.message-box').on('keyup', function(e){
-		if( e.key == 'Enter' ){
-			$('button.send').click();
-		} else if( $(this).val() > '' && $('button.send').is(':hidden') ){
+		adjustTextareaHeight( $(this) );
+		if( $(this).val() > '' && $('button.send').is(':hidden') ){
 			$('button.send').show();
 			$('button.audio').hide();
 		} else if( $(this).val() == '' && $('button.audio').is(':hidden') && $('button.audio').attr('data-accepted') == 1 ){
