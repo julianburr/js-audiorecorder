@@ -1,0 +1,78 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?dwzj2g');
+	src:url('fonts/icomoon.eot?dwzj2g#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?dwzj2g') format('truetype'),
+		url('fonts/icomoon.woff?dwzj2g') format('woff'),
+		url('fonts/icomoon.svg?dwzj2g#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mic:before {
+	content: "\e00f";
+}
+.icon-pause:before {
+	content: "\e018";
+}
+.icon-play_arrow:before {
+	content: "\e01b";
+}
+.icon-send:before {
+	content: "\e087";
+}
+.icon-attach_file:before {
+	content: "\e0c0";
+}
+.icon-attachment:before {
+	content: "\e0f7";
+}
+.icon-file_download:before {
+	content: "\e0ff";
+}
+.icon-file_upload:before {
+	content: "\e100";
+}
+.icon-local_see:before {
+	content: "\e1ef";
+}
+.icon-delete:before {
+	content: "\e287";
+}
+.icon-done:before {
+	content: "\e28a";
+}
+.icon-done_all:before {
+	content: "\e28b";
+}
+.icon-download:before {
+	content: "\e900";
+}
+.icon-attachment2:before {
+	content: "\e901";
+}
+.icon-mic2:before {
+	content: "\e902";
+}
+.icon-paper-plane:before {
+	content: "\e846";
+}
+.icon-mic3:before {
+	content: "\e903";
+}
+

@@ -1,1 +1,31 @@
-My Page
+<!doctype html>
+<html>
+<head>
+	<title>Github / Julian Burr / AudioRecorder</title>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/audiorecorder.js"></script>
+	<script src="js/timer.js"></script>
+	<script src="js/demo.js"></script>
+	
+	<link rel="stylesheet" href="icons/style.css">
+	<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+	<div class="demo">
+	
+		<h1>AudioRecorder</h1>
+		<p>Here a little demo application that makes use of the simple audio recording jQuery plugin and its custom events. In this example the audio data gets inserted as base64 encrypted files, however it would be just as simple to save the blob or an acutal mp3 file on the server side.</p>
+		<p>Feel free to test it :)</p>
+		
+		<div class="new-message">
+			<div class="message-box"><span class="onair"><span class="icon icon-recording"></span> Recording audio:</span> <span class="timer"></span></div>
+			<textarea class="message-box" rows=1 placeholder="Type your message..."></textarea>
+			<button class="audio"><span class="icon icon-mic"></span></button>
+			<button class="send"><span class="icon icon-send"></span></button>
+		</div>
+		<div class="messages"></div>
+		
+	</div>
+</body>
+</html>
