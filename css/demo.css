@@ -1,0 +1,95 @@
+body {
+	margin:0;
+	padding:0;
+	width:100%;
+	float:left;
+	font-size:14px;
+}
+
+body, select, textarea, input, button {
+	font-family:'Open Sans';
+}
+
+select, textarea, input, button {
+	font-size:100%;
+}
+
+.messages, .messages .message, .new-message {
+	width:100%;
+	float:left;
+	padding:10px;
+	box-sizing:border-box;
+	margin:0 0 10px 0;
+}
+
+.messages {
+	background:none #eee;
+}
+
+.message {
+	background:none #fff;
+}
+
+.new-message {
+	background:none #ff0;
+	padding-right:80px;
+	position:relative;
+}
+
+.new-message button {
+	position:absolute;
+	right:10px;
+	top:10px;
+	width:50px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	border:0 none;
+	background:none #000;
+	color:#fff;
+	font-size:160%;
+	cursor:pointer;
+}
+
+.new-message button.recording {
+	background:none #f00;
+}
+
+.new-message button,
+.new-message .message-box {
+	-webkit-box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
+	-moz-box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
+	box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.new-message .message-box {
+	width:100%;
+	float:left;
+	box-sizing:border-box;
+	padding:12px;
+	margin:0;
+	border:0 none;
+	background:none #fff;
+	font-size:120%;
+	resize:none;
+	overflow:auto;
+	height:50px;
+	position:relative;
+}
+
+.new-message .message-box:after {
+	content:' ';
+	position:absolute;
+	z-index:1000;
+	top:0;
+	right:-10px;
+	width:0;
+	height:0;
+	border-style:solid;
+	border-width:10px 10px 0 0;
+	border-color:#f00 transparent transparent transparent;
+
+
+button.audio {
+	display:none;
+}
