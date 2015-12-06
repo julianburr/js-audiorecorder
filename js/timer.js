@@ -21,6 +21,7 @@
 		function start(){
 			if( !starttime ){
 				starttime = new Date().getTime();
+				set(0);
 				output_sec = 0;
 				output_min = 0;
 				timerinterval = setInterval( function(){
@@ -54,9 +55,9 @@
 		this.stop = stop;
 		function stop(){
 			endtime = new Date().getTime();
+			this.duration = ( endtime - starttime ) / 1000;
 			clearTimeout(timertimeout);
 			clearInterval(timerinterval);
-			this.duration = ( endtime - starttime ) / 1000;
 			clear();
 		}
 		
@@ -72,6 +73,9 @@
 		function clear(){
 			starttime = null;
 			endtime = null;
+			output = '';
+			output_sec = 0;
+			output_min = 0;
 		}
 		
 		this.set = set;
@@ -80,7 +84,7 @@
 			this.duration = seconds;
 			endtime =  new Date().getTime();
 			starttime = endtime - ( seconds *  1000 );
-			output_sec = Math.round( parseFloat(seconds) );
+			output_sec = Math.floor( parseFloat(seconds) );
 			output_min = 0;
 			while( output_sec > 60 ){
 				output_sec -= 60;
